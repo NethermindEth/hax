@@ -804,7 +804,8 @@ struct
       method literal_Int ~value ~negative ~kind =
         (if negative then !^"-" else empty) ^^ string value
 
-      method literal_String x1 = string "\"" ^^ string x1 ^^ string "\"%string"
+      method literal_String x1 = 
+        string "\"" ^^ string (Str.global_replace (Str.regexp "\"") "\"\"" x1) ^^ string "\"%string"
 
       method loop_kind_ForIndexLoop ~start:_ ~end_:_ ~var:_ ~var_typ:_ ~witness
           =
